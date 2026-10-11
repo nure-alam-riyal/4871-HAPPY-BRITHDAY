@@ -30,6 +30,31 @@ Open the local URL printed by Vite in your browser.
 | `npm run build` | Create a production build in `dist/` |
 | `npm run preview` | Preview the production build locally |
 
+## Deploy to Vercel without GitHub
+
+The `vercel.json` configuration sends direct route visits back to the React app, so routes such as `/l9` and `/l10` work when refreshed.
+
+From the project folder, install dependencies and sign in to Vercel:
+
+```bash
+npm install
+npx vercel login
+```
+
+Create a Vercel preview deployment from your local project:
+
+```bash
+npx vercel
+```
+
+When it is ready, deploy to production:
+
+```bash
+npx vercel --prod
+```
+
+This deploys from your local folder using the Vercel CLI; it does not require connecting or deploying through GitHub.
+
 ## Game flow
 
 1. Open the home page and continue to the game rules.
