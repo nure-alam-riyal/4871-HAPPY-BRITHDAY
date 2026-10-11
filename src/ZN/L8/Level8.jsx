@@ -96,7 +96,7 @@ const Level8 = () => {
                   <button
                     type="button"
                     onClick={() => handleChoice(item)}
-                    className={`group relative -left-1/2 -top-1/2 flex w-48 h-44 rounded-full  animate-[spin_20s_linear_infinite_reverse] flex-col overflow-hidden rounded-xl border text-left shadow-[0_12px_28px_rgba(100,74,42,0.16)] transition hover:scale-105 sm:h-32 sm:w-44 sm:rounded-2xl ${selectedId === item.id ? ' ring-2 ring-[#f9e9cf]' : 'border-[#f6dfc7]'}`}
+                    className={`group relative -left-1/2 -top-1/2 flex w-48 h-44 rounded-full animate-[spin_20s_linear_infinite_reverse] flex-col overflow-hidden border text-left shadow-[0_12px_28px_rgba(100,74,42,0.16)] transition hover:scale-105 sm:h-32 sm:w-44 sm:rounded-2xl ${selectedId === item.id ? ' ring-2 ring-[#f9e9cf]' : 'border-[#f6dfc7]'}`}
                   >
                     {/* <div className=''> */}
                       <img src={item.image} alt={item.title} className="h-full w-full rounded-full bg-[#fffaf3] object-center p-1" />
