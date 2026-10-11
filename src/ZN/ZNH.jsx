@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useJourneyClock from './useJourneyClock'
 
 const ZNH = () => {
   const [isModalOpen, setIsModalOpen] = useState(true)
   const navigate = useNavigate()
+  const { now, isJourneyTime, countdown } = useJourneyClock()
 
   return (
     <main className="relative grid min-h-screen place-items-center overflow-hidden bg-[#fbf6ef] px-5 py-12">
@@ -12,10 +14,24 @@ const ZNH = () => {
 
       <section className="relative w-full max-w-xl rounded-3xl border border-[#eadfd7] bg-white/80 p-8 text-center shadow-[0_24px_70px_rgba(71,49,54,0.12)] backdrop-blur-sm sm:p-12">
         <span className="mb-5 inline-grid h-14 w-14 place-items-center rounded-full bg-[#f7e9e4] text-2xl text-[#c77871]" aria-hidden="true">✿</span>
-        {/* <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-[#a1807e]">A little birthday surprise</p> */}
-        <h1 className="font-display text-4xl text-[#312c36] sm:text-5xl"> <span className="text-[#c77871]">Zakia!</span></h1>
-        <p className="mt-4 text-sm leading-7 text-[#77717a]">There’s one more little surprise waiting for you.</p>
-        <p className="mt-2 text-sm text-[#8d7a7c]">Are you ready for the next surprise?</p>
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#a1807e]">
+          Local time · {now.toLocaleTimeString()}
+        </p>
+        {isJourneyTime ? (
+          <>
+            <h1 className="mt-4 animate-[appear_.7s_ease-out_both] font-display text-3xl text-[#312c36] sm:text-4xl">
+              Welcome to the <span className="text-[#c77871]">25 Years Journey!</span>
+            </h1>
+            <p className="mt-4 text-sm leading-7 text-[#77717a]">Your next beautiful chapter begins now.</p>
+          </>
+        ) : (
+          <>
+            <h1 className="mt-4 font-display text-3xl text-[#312c36] sm:text-4xl">Waiting for 12:00 AM</h1>
+            <p className="mt-4 text-sm leading-7 text-[#77717a]">
+              The 25 Years Journey begins in <span className="font-bold tabular-nums text-[#c77871]">{countdown}</span>.
+            </p>
+          </>
+        )}
         <button className="btn mt-7 border-0 bg-[#c77871] px-7 text-white hover:bg-[#b56b65]" onClick={() => setIsModalOpen(true)}>
           Show me
         </button>
@@ -31,13 +47,19 @@ const ZNH = () => {
             role="dialog"
           >
             <span className="mb-5 inline-grid h-14 w-14 place-items-center rounded-full bg-[#f7e9e4] text-2xl text-[#c77871]" aria-hidden="true">♡</span>
-            <h2 id="next-surprise-title" className="font-display text-3xl text-[#312c36]">Ready for the next level?</h2>
-            <p className="mt-3 text-sm leading-6 text-[#77717a]">Your next surprise is just a little step away.</p>
+            <h2 id="next-surprise-title" className="font-display text-3xl text-[#312c36]">
+              {isJourneyTime ? 'Welcome to the 25 Years Journey!' : 'Ready for the next level?'}
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-[#77717a]">
+              {isJourneyTime ? 'Your next beautiful chapter begins now.' : 'Your next surprise is just a little step away.'}
+            </p>
             <button
-              className="btn mt-7 w-full border-0 bg-[#c77871] text-white hover:bg-[#b56b65]"
+              className="btn mt-7 w-full border-0 bg-[#c77871] text-white hover:bg-[#b56b65] disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={!isJourneyTime}
               onClick={() => navigate('/next-level')}
             >
-              Go to the next page <span aria-hidden="true">→</span>
+              {isJourneyTime ? 'Begin the journey' : `Wait ${countdown}`}
+              {isJourneyTime && <span aria-hidden="true">→</span>}
             </button>
             <button className="btn btn-ghost mt-2 w-full text-[#82777e]" onClick={() => setIsModalOpen(false)}>
               Not now
