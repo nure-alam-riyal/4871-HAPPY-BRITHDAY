@@ -32,11 +32,15 @@ const Level2 = () => {
     setSelectedId(item.id);
     setTotalSteps((prevTotalSteps) => prevTotalSteps + 1);
     if (item.score >= 0) {
-      setScore((prev) => prev + 1);
+      const nextScore = score + 1;
+      setScore(nextScore);
       setMood('happy');
       setComment(item.comment);
-       if(score==7)
-        navigate('/l3')
+      if (nextScore >= 7) {
+        navigate('/l3');
+      } else if (nextScore < 4) {
+        navigate('/l1');
+      }
       return;
     }
 
@@ -113,10 +117,6 @@ const Level2 = () => {
                   <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#7065a5] sm:text-xs sm:tracking-[0.2em]">Score</span>
                   <span className="mt-1 break-all text-2xl font-bold leading-tight text-[#7d68d8] sm:mt-2 sm:text-4xl">{score}</span>
                   <span className="mt-0.5 text-[10px] text-[#7065a5] sm:text-xs">stars</span>
-                </div>
-                <div className="flex flex-1 flex-col items-center justify-center rounded-[1.25rem] border border-[#dfeaf8] bg-[#f6fbff] p-3 text-center shadow-sm sm:rounded-[1.6rem] sm:p-4">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.08em] text-[#586c8a] sm:text-xs sm:tracking-[0.15em]">Wrong steps</span>
-                  <span className="mt-1 text-2xl font-bold leading-tight text-[#5f7db8] sm:mt-2 sm:text-4xl">{wrongStep}</span>
                 </div>
                 <div className="hidden rounded-xl border border-[#e6deff] bg-[#faf7ff] px-3 py-2 text-center text-xs font-semibold leading-4 text-[#7b66b4] md:block sm:rounded-2xl sm:px-3 sm:py-3">
                   +1 correct<br />−1 to −5 wrong

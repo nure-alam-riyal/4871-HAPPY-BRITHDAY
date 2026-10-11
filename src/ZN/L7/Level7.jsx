@@ -50,11 +50,15 @@ const Level7 = () => {
     setSelectedId(item.id);
     setTotalSteps((prevTotalSteps) => prevTotalSteps + 1);
     if (item.score >= 0) {
-      setScore((prev) => prev + 1);
+      const nextScore = score + 1;
+      setScore(nextScore);
       setMood('happy');
       setComment(item.comment);
-      if(score==22)
-        navigate('/l8')
+      if (nextScore >= 22) {
+        navigate('/l8');
+      } else if (nextScore < 19) {
+        navigate('/l6');
+      }
       return;
     }
     const penalty = Math.floor(Math.random() * 5) + 1;
@@ -80,7 +84,6 @@ const Level7 = () => {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <div className="rounded-full border border-[#dfeadf] bg-[#f3fbf4] px-4 py-2 text-sm font-semibold text-[#3d624d]">Score: <span className="text-[#6aa27e]">{score}</span></div>
-            <div className="rounded-full border border-[#e2ebdf] bg-[#f7fcf8] px-4 py-2 text-sm font-semibold text-[#4d695d]">Wrong steps: <span className="text-[#75957a]">{wrongStep}</span></div>
           </div>
         </div>
 

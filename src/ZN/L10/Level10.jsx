@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../AuthProvider/AuthProvider';
+import FallingDecorations from '../FallingDecorations';
 const Image = new URL('../L9/IMG-20241204-WA0005.jpg', import.meta.url).href;
+const celebrationAudio = new URL('./WhatsApp Audio 2026-10-11 at 10.39.13 PM.mp4', import.meta.url).href;
 const birthdayImages = Object.values(
   import.meta.glob('./*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })
 );
@@ -33,7 +35,7 @@ const Level10 = () => {
   const { setScore, setWrongStep, setTotalSteps, setGameStartedAt } = useAuth();
   const [activeModal, setActiveModal] = useState(null);
   const [now, setNow] = useState(() => new Date());
-  const celebrationAudioRef = useRef(false);
+  const celebrationAudioRef = useRef(null);
   const age = getAge(now);
 
   useEffect(() => {
@@ -51,27 +53,26 @@ const Level10 = () => {
   }, [activeModal]);
 
   useEffect(() => {
-    if (activeModal !== 'celebration' || !('speechSynthesis' in window)) return undefined;
-    return () => {
-      celebrationAudioRef.current = false;
-      window.speechSynthesis.cancel();
-    };
+    const audio = celebrationAudioRef.current;
+    if (!audio) return undefined;
+
+    if (activeModal === 'celebration') {
+      audio.volume = 0.8;
+      audio.currentTime = 0;
+      const playPromise = audio.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+      return undefined;
+    }
+
+    audio.pause();
+    audio.currentTime = 0;
+    return undefined;
   }, [activeModal]);
 
   const openCelebration = () => {
     setActiveModal('celebration');
-    if ('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window) {
-      celebrationAudioRef.current = false;
-      window.speechSynthesis.cancel();
-      celebrationAudioRef.current = true;
-      const greeting = new SpeechSynthesisUtterance('Happy Birthday, Nishat!');
-      greeting.rate = 0.9;
-      greeting.pitch = 1.15;
-      greeting.onend = () => {
-        if (celebrationAudioRef.current) window.speechSynthesis.speak(greeting);
-      };
-      window.speechSynthesis.speak(greeting);
-    }
   };
 
   const exit = () => {
@@ -85,6 +86,7 @@ const Level10 = () => {
   const modalContents = {
     celebration: (
       <div className="relative animate-[appear_.55s_ease-out_both] overflow-hidden rounded-[1.75rem] bg-[linear-gradient(135deg,#fff1d9,#ffe5f1_52%,#e9e5ff)] p-7 text-center sm:p-10">
+        <FallingDecorations />
         <span className="birthday-firework left-[18%] top-[38%]" aria-hidden="true" />
         <span className="birthday-firework left-[82%] top-[34%] [animation-delay:500ms]" aria-hidden="true" />
         <span className="birthday-firework left-1/2 top-[78%] [animation-delay:900ms]" aria-hidden="true" />
@@ -96,6 +98,14 @@ const Level10 = () => {
           <p className="mx-auto mt-5 max-w-lg text-base leading-8 text-[#62546d]">
           May your day be filled with laughter, sweet surprises, and all the love your heart can hold. Keep shining, Zakia! 🥳
           </p>
+          <audio
+            ref={celebrationAudioRef}
+            autoPlay
+            loop
+            className="hidden"
+            preload="auto"
+            src={celebrationAudio}
+          />
         </div>
       </div>
     ),
@@ -184,7 +194,7 @@ const Level10 = () => {
                 📸 Photos & thank you
               </button>
               <button type="button" onClick={exit} className="rounded-2xl border border-[#d9ebef] bg-[#f1fbfc] px-4 py-4 text-sm font-bold text-[#557c84] shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-                LOvE YOU SO MUCH
+                LOVE YOU SO MUCH
               </button>
             </div>
           </div>

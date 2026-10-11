@@ -2,6 +2,7 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { FaSadCry } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import FallingDecorations from './FallingDecorations'
 import useJourneyClock from './useJourneyClock'
 
 const ProveYou = () => {
@@ -25,6 +26,7 @@ const ProveYou = () => {
 
   return (
     <main className="relative grid min-h-screen place-items-center overflow-hidden bg-[#fbf6ef] px-5">
+      {isJourneyTime && <FallingDecorations />}
       <div className="pointer-events-none absolute left-[12%] top-[18%] h-40 w-40 animate-pulse rounded-full bg-[#f0dcd5]/70 blur-3xl" />
       <div className="pointer-events-none absolute bottom-[14%] right-[13%] h-48 w-48 animate-pulse rounded-full bg-[#e7deeb]/70 blur-3xl [animation-delay:700ms]" />
 

@@ -68,7 +68,7 @@ const Level9 = () => {
                 <p className="mt-2 text-3xl font-black text-[#4b9aa0]">{totalSteps}</p>
               </div>
               <div className="col-span-2 rounded-2xl border border-[#e8e0f1] bg-[#faf7ff] p-4 sm:col-span-3">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#756594]">Time to finish</p>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#756594]">Time spent</p>
                 <p className="mt-2 text-3xl font-black tabular-nums text-[#8061bc]">{finishDuration}</p>
                 {gameStartedAt && (
                   <p className="mt-1 text-xs text-[#756594]">

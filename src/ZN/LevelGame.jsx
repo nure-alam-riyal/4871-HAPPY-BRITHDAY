@@ -180,9 +180,6 @@ export const levelPages = levelThemes.map((theme, themeIndex) => {
                 <div className="rounded-full border border-white/60 bg-white/60 px-4 py-2 text-sm font-semibold">
                   Stars: <span style={{ color: theme.accent }}>{score}</span>
                 </div>
-                <div className="rounded-full border border-white/60 bg-white/60 px-4 py-2 text-sm font-semibold">
-                  Wrong: <span style={{ color: theme.dark }}>{wrongStep}</span>
-                </div>
               </div>
             </div>
 

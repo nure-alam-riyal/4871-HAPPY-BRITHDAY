@@ -48,6 +48,7 @@ const Level1 = () => {
       setComment(item.comment);
      if(score==3)
         navigate('/l2')
+      
       return;
     }
 
@@ -77,9 +78,6 @@ const Level1 = () => {
             <div className="flex flex-wrap items-center gap-3">
               <div className="rounded-full border border-[#f0d8c9] bg-[#fff5f1] px-4 py-2 text-sm font-semibold text-[#7c5d59]">
                 Score: <span className="text-[#c77871]">{score}</span>
-              </div>
-              <div className="rounded-full border border-[#e9dff6] bg-[#f7f3ff] px-4 py-2 text-sm font-semibold text-[#614b79]">
-                Wrong steps: <span className="text-[#8d6fb4]">{wrongStep}</span>
               </div>
             </div>
           </div>

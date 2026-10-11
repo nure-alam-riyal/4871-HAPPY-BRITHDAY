@@ -132,6 +132,9 @@ h1 em, h2 em { color: #c77871; font-weight: 500; }
 .confetti { position: fixed; inset: 0; z-index: 20; pointer-events: none; overflow: hidden; }
 .confetti i { position: absolute; top: -12px; width: 8px; height: 13px; animation: fall 1.8s ease-in forwards; }
 @keyframes fall { to { transform: translateY(105vh) rotate(720deg); opacity: .15; } }
+.falling-decoration { position: absolute; top: -4rem; line-height: 1; color: #c77871; text-shadow: 0 2px 12px rgba(199,120,113,.38); animation-name: falling-decoration-down; animation-timing-function: linear; animation-iteration-count: infinite; }
+@keyframes falling-decoration-down { 0% { opacity: 0; transform: translateY(-8vh) rotate(0deg); } 10%, 85% { opacity: .9; } 100% { opacity: 0; transform: translateY(110vh) rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .falling-decoration { animation-duration: 12s !important; } }
 @keyframes appear { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 .birthday-firework { position: absolute; z-index: 0; width: 1px; height: 1px; pointer-events: none; }
